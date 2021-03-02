@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 # */AIPND-revision/intropyproject-classify-pet-images/classify_images.py
 #                                                                             
-# PROGRAMMER: 
-# DATE CREATED:                                 
+# PROGRAMMER: Martyna Kosciukiewicz
+# DATE CREATED: 1/03/2021                                 
 # REVISED DATE: 
 # PURPOSE: Create a function classify_images that uses the classifier function 
 #          to create the classifier labels and then compares the classifier 
@@ -12,7 +12,7 @@
 #             and as in_arg.dir for function call within main. 
 #            -The results dictionary as results_dic within classify_images 
 #             function and results for the functin call within main.
-#            -The CNN model architecture as model within classify_images function
+#            -The CNN model architecture as model wihtin classify_images function
 #             and in_arg.arch for the function call within main. 
 #           This function uses the extend function to add items to the list 
 #           that's the 'value' of the results dictionary. You will be adding the
@@ -65,4 +65,39 @@ def classify_images(images_dir, results_dic, model):
      Returns:
            None - results_dic is mutable data type so no return needed.         
     """
-    None 
+
+    #Create dictionary {filename:[pet label,classifer label,comparison of labels]} 
+    #example_dictionary = {'Beagle_01141.jpg': ['beagle', 'english foxhound', 0]}
+
+    #Input data (results_dic) in format {filename:pet label}
+    #Want to check if pet label is in classifer labels using in operation
+
+    #Loop through results_dic and retrieve keys and values
+    for filename, dictionary_list in results_dic.items(): 
+      #pass file and model to classifier and store the output (labels)
+      classifier_label = classifier(images_dir+'/'+filename, model) 
+      classifier_label = classifier_label.lower().strip()
+
+      #print for comparison
+      #print(filename+ " " + pet_label[0] + " " + classifier_label)
+      #check match
+      if dictionary_list[0] in classifier_label:
+        comparison = 1
+        #print("Filename: " + filename + " matched")
+      else:
+        comparison = 0
+        #print("Filename: " + filename + " not matched")
+
+      temp_list = [classifier_label, comparison]
+      dictionary_list.extend(temp_list)
+
+      #print(dictionary_list)
+
+
+
+      
+
+    
+    
+
+
