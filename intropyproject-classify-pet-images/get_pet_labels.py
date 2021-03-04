@@ -4,7 +4,7 @@
 #                                                                             
 # PROGRAMMER: Martyna Kosciukiewicz
 # DATE CREATED: 1/03/2021                                  
-# REVISED DATE: 
+# REVISED DATE: 4/04/2021
 # PURPOSE: Create the function get_pet_labels that creates the pet labels from 
 #          the image's filename. This function inputs: 
 #           - The Image Folder as image_dir within get_pet_labels function and 
@@ -20,6 +20,17 @@
 from os import listdir
 
 filename_list = listdir("pet_images/")
+#Create a new list fixing the issue with files starting with "."
+#Filtering the list at the input is more reliable and faster than doing it multiple times throughout the code.
+filename_list_fixed = []
+for idx in range(0, len(filename_list), 1): 
+    filename = filename_list[idx] #getting the filename from the list at that index
+    #Filter files that start with "."
+    if filename.startswith("."):
+        continue
+    #Only append files to the list that are valid. 
+    filename_list_fixed.append(filename)
+
 
 # TODO 2: Define get_pet_labels function below please be certain to replace None
 #       in the return statement with results_dic dictionary that you create 
@@ -53,8 +64,8 @@ def get_pet_labels(image_dir):
     pet_labels = [] #create an empty pet_labels list
 
     #Loop to construct pet_name list
-    for idx in range(0, len(filename_list), 1): 
-        filename = filename_list[idx] #getting the filename from the list at that index
+    for idx in range(0, len(filename_list_fixed), 1): 
+        filename = filename_list_fixed[idx] #getting the filename from the list at that index
         filename_lower = filename.lower() #converting the filename to lowercase
         pet_label_list = filename_lower.split("_") #split the filename into a list of words at underscore
         pet_label = "" #initialize variable
@@ -65,13 +76,14 @@ def get_pet_labels(image_dir):
         pet_labels.append(pet_label) #add pet_label to pet_labels list
 
     # Loop to construct results_dict with filenames and pet labels
-    for idx in range(0, len(filename_list), 1):
-        if filename_list[idx] not in results_dic:
-             results_dic[filename_list[idx]] = [pet_labels[idx]]
+    for idx in range(0, len(filename_list_fixed), 1):
+        filename = filename_list_fixed[idx] #getting the filename from the list at that index
+        if filename not in results_dic:
+            results_dic[filename] = [pet_labels[idx]]
         else:
-             print("** Warning: Key=", filename_list[idx], 
+             print("** Warning: Key=", filename, 
                    "already exists in results_dic with value =", 
-                   results_dic[filename_list[idx]])
+                   results_dic[filename])
 
     #Iterating through a dictionary printing all keys & their associated values
     print("\nPrinting all key-value pairs in dictionary results_dic:")

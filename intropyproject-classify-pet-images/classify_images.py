@@ -4,7 +4,7 @@
 #                                                                             
 # PROGRAMMER: Martyna Kosciukiewicz
 # DATE CREATED: 1/03/2021                                 
-# REVISED DATE: 
+# REVISED DATE: 4/03/2021
 # PURPOSE: Create a function classify_images that uses the classifier function 
 #          to create the classifier labels and then compares the classifier 
 #          labels to the pet image labels. This function inputs:
@@ -66,7 +66,7 @@ def classify_images(images_dir, results_dic, model):
            None - results_dic is mutable data type so no return needed.         
     """
 
-    #Create dictionary {filename:[pet label,classifer label,comparison of labels]} 
+    #Dictionary structure {filename:[pet label,classifer label,comparison of labels]} 
     #example_dictionary = {'Beagle_01141.jpg': ['beagle', 'english foxhound', 0]}
 
     #Input data (results_dic) in format {filename:pet label}
